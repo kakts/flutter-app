@@ -41,11 +41,53 @@ class RandomWordsState extends State<RandomWords> {
   // allow duplicate entries.
   final _saved = new Set<WordPair>();
 
+  // When the user taps the list icon in the app, build a route and push it to the Navigator's stack.
+  // This action changes the screen to display the new route
+  void _pushSaved() {
+    // Add the MaterialPageRoute and its builder.
+    Navigator.of(context).push(
+      new MaterialPageRoute(
+        builder: (context) {
+          final tiles = _saved.map(
+            (pair) {
+              return new ListTile(
+                title: new Text(
+                  pair.asPascalCase,
+                  style: _biggerFont,
+                ),
+              );
+            },
+          );
+          final divided = ListTile
+            .divideTiles(
+              context: context,
+              tiles: tiles,
+            )
+            .toList();
+
+          // builder property returns a Scaffold, containing the app bar for the new route
+          return new Scaffold(
+            appBar: new AppBar(
+              title: new Text('Saved Suggestions'),
+            ),
+            body: new ListView(children: divided),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('Startup Name Generator'),
+        actions: <Widget>[
+          new IconButton(
+            icon: new Icon(Icons.list),
+            onPressed: _pushSaved,
+          )
+        ]
       ),
       body: _buildSuggestions()
     );
