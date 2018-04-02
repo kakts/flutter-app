@@ -4,6 +4,8 @@ import 'package:english_words/english_words.dart';
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
+  void _restitchDress() {}
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -13,7 +15,20 @@ class MyApp extends StatelessWidget {
       ),
       home: new Scaffold(
         appBar: new AppBar(
+          centerTitle: true,
           title: new Text('Welcome to Flutter'),
+          actions: <Widget>[
+            new IconButton(
+              icon: new Icon(Icons.playlist_add),
+              tooltip: 'Restitch it',
+              onPressed: _restitchDress,
+            ),
+            new IconButton(
+              icon: new Icon(Icons.playlist_add),
+              tooltip: 'Restitch it2',
+              onPressed: _restitchDress,
+            ),
+          ]
         ),
         body: new Center(
           child: new RandomWords(), // this highlighted text
