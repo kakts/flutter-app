@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
+
 import 'package:english_words/english_words.dart';
+import 'dart:async';
 
 void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
-  void _restitchDress() {}
+  void _openCart() {
+    debugPrint("Hello");
+  }
 
+  void _test(String str) {
+    debugPrint("Helo");
+    debugPrint(str);
+  }
+
+  void _submit(String str) {
+    debugPrint("Submitted");
+    debugPrint(str);
+
+  }
+  // this build method is typically only called in three situations.
+  // The first time the widget is inserted in the tree
+  // Widget's parent changes its configuration.
+  // an InheritedWidget it depends on changes.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -19,19 +37,22 @@ class MyApp extends StatelessWidget {
           title: new Text('Welcome to Flutter'),
           actions: <Widget>[
             new IconButton(
-              icon: new Icon(Icons.playlist_add),
-              tooltip: 'Restitch it',
-              onPressed: _restitchDress,
-            ),
-            new IconButton(
-              icon: new Icon(Icons.playlist_add),
-              tooltip: 'Restitch it2',
-              onPressed: _restitchDress,
+              icon: new Icon(Icons.shopping_cart),
+              tooltip: 'Open shopping cart',
+              onPressed: _openCart,
             ),
           ]
         ),
         body: new Center(
-          child: new RandomWords(), // this highlighted text
+          child: new TextField(
+            autocorrect: false,
+            autofocus: false,
+            decoration: new InputDecoration(
+              hintText: 'Type something'
+            ),
+            onChanged: _test,
+            onSubmitted: _submit,
+          ), // this highlighted text
         ),
       ),
     );
